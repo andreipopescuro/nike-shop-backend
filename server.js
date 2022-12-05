@@ -24,7 +24,11 @@ app.use(
     verify: (req, res, buffer) => (req["rawBody"] = buffer),
   })
 );
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://nike-shop-app.onrender.com/"],
+  })
+);
 
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);

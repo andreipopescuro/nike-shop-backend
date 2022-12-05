@@ -25,9 +25,7 @@ app.use(
   })
 );
 app.use(
-  cors({
-    origin: ["http://localhost:3000", "https://nike-shop-app.onrender.com/"],
-  })
+  cors()
 );
 
 app.use("/api/users", userRoute);

@@ -104,12 +104,11 @@ router.post("/webhook", async (request, response) => {
   let event;
   let data;
   try {
-    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-    // event = stripe.webhooks.constructEvent(
-    //   request["rawBody"],
-    //   sig,
-    //   endpointSecret
-    // );
+    event = stripe.webhooks.constructEvent(
+      request["rawBody"],
+      sig,
+      endpointSecret
+    );
   } catch (err) {
     response.status(400).send(`Webhook Error: ${err.message}`);
   }

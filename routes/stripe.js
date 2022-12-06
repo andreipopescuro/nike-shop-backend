@@ -3,6 +3,8 @@ const router = require("express").Router();
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 const domain = process.env.stripeDomain;
 
+// const domain = "http://localhost:3000"
+
 router.post("/payment", async (req, res) => {
   if (req.body.products.length == 0) {
     res.status(200).json("Cart shouldn't be empty");
@@ -102,11 +104,12 @@ router.post("/webhook", async (request, response) => {
   let event;
   let data;
   try {
-    event = stripe.webhooks.constructEvent(
-      request["rawBody"],
-      sig,
-      endpointSecret
-    );
+    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    // event = stripe.webhooks.constructEvent(
+    //   request["rawBody"],
+    //   sig,
+    //   endpointSecret
+    // );
   } catch (err) {
     response.status(400).send(`Webhook Error: ${err.message}`);
   }

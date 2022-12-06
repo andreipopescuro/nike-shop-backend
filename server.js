@@ -19,11 +19,15 @@ mongoose
     console.log(err);
   });
 
-app.use(
-  express.json({
-    verify: (req, res, buffer) => (req["rawBody"] = buffer),
-  })
-);
+// app.use(
+//   express.json({
+//     verify: (req, res, buffer) => (req["rawBody"] = buffer),
+//   })
+// );
+
+app.use("/api/checkout/webhook", express.raw({ type: "*/*" }));
+
+app.use(express.json());
 app.use(cors());
 
 app.use("/api/users", userRoute);

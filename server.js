@@ -28,6 +28,7 @@ app.use(
 
 app.use(cors());
 
+app.get("/api/sv/alive", (req, res) => res.status(200).json("Ok"));
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/categories", categoryRoute);

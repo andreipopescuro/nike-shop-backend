@@ -25,16 +25,18 @@ app.use(
   })
 );
 
-
 app.use(cors());
 
-app.get("/api/sv/alive", (req, res) => res.status(200).json("Ok"));
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/categories", categoryRoute);
 app.use("/api/cart", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
+app.get("/api/sv/alive", (req, res) => {
+  console.log("got req");
+  res.status(200).json("Ok");
+});
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Runnning `);
